@@ -8,9 +8,10 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 // import env from './env';
 
+Vue.use(VueAxios,axios)
 Vue.config.productionTip = false
 // 根据前端的跨域方式做调整,baseURL
-axios.defaults.baseURL = '/api'
+// axios.defaults.baseURL = '/api'
 // 超时时间设置
 axios.defaults.timeout = 8000
 // 根据根据环境变量获取不同地址baseURL
@@ -28,7 +29,6 @@ axios.interceptors.response.use(function (response) {
     alert(res.msg)
   }
 })
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -7,7 +7,21 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      res: {}
+    }
+  },
+  mounted () {
+    // vue-axios将axios挂载到vue上,这样就能通过this.axios获取到axios
+    // public是根路径,不用public/,直接/
+    this.axios.get('api/login.json').then((res) => {
+    // this.axios.get('api/user/login.json').then((res) => {
+      this.res = res
+      console.log('res', this.res)
+    })
+  }
 }
 </script>
 
