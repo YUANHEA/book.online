@@ -6,12 +6,15 @@ import router from './router'
 import axios from 'axios'
 /* eslint-disable */
 import VueAxios from 'vue-axios'
+// import env from './env';
 
 Vue.config.productionTip = false
 // 根据前端的跨域方式做调整,baseURL
 axios.defaults.baseURL = '/api'
 // 超时时间设置
 axios.defaults.timeout = 8000
+// 根据根据环境变量获取不同地址baseURL
+// axios.defaults.baseURL = env.baseURL
 // 接口错误拦截
 axios.interceptors.response.use(function (response) {
   // 后端返回数据要从data拿出
