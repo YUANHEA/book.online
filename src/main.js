@@ -6,12 +6,14 @@ import router from './router'
 import axios from 'axios'
 /* eslint-disable */
 import VueAxios from 'vue-axios'
+import VueCookie from 'vue-cookie'
 // import env from './env';
-const mock = true
+const mock = false
 if (mock) {
   require('./mock/api')
 }
 Vue.use(VueAxios, axios)
+Vue.use(VueCookie)
 Vue.config.productionTip = false
 // 根据前端的跨域方式做调整,baseURL
 axios.defaults.baseURL = '/api'
@@ -27,9 +29,14 @@ axios.interceptors.response.use(function (response) {
   if (res.status === 0) {
     return res.data
   } else if (res.status === 10) {
-    window.location.href = '/#/login'
+    if (location.hash !== '#/index') {
+      window.location.href = '/#/login'
+    }
   } else {
     alert(res.msg)
+    // 不让异常情况进入then()
+    // 在axios拦截器中，利用promise.reject()对异常处理
+    return Promise.reject(res)
   }
 })
 /* eslint-disable no-new */
