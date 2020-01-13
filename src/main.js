@@ -29,7 +29,7 @@ axios.interceptors.response.use(function (response) {
   if (res.status === 0) {
     return res.data
   } else if (res.status === 10) {
-    if (location.hash !== '#/index') {
+    if (location.hash !== '#/index' || location.hash !== '#/home') {
       window.location.href = '/#/login'
     }
   } else {
