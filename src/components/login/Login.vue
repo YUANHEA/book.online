@@ -101,6 +101,7 @@ export default {
     //     height:100%;
     //   }
     // }
+    background-color: #000;
     .wrapper {
         // background:url('/imgs/login-bg.jpg') no-repeat center;
         .container {
