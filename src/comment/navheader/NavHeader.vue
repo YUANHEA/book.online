@@ -122,19 +122,42 @@ export default {}
                 }
             }
         }
-    }
-}
-.header-menu {
-    display: inline-block;
-    width: 643px;
-    padding-left: 209px;
-    .item-menu{
-        display: inline-block;
-        color: #333333;
-        line-height: 112px;
-        font-weight:bold;
-        font-size:16px;
-        margin-right: 20px;
+        .header-menu {
+            display: inline-block;
+            width: 643px;
+            padding-left: 209px;
+            .item-menu{
+                display: inline-block;
+                color: #333333;
+                line-height: 112px;
+                font-weight:bold;
+                font-size:16px;
+                margin-right: 20px;
+            }
+        }
+        .header-search {
+            .wrapper{
+                height: 50px;
+                border: 1px solid #e0e0e0;
+                display:   flex;
+                align-items: center;
+                input{
+                    display: inline-block;
+                    height: 100%;
+                    border: none;
+                    border-right: 1px solid #e0e0e0;
+                    padding-left: 13px;
+                    box-sizing: border-box;
+                }
+                a{
+                    display: inline-block;
+                    width: 55px;
+                    height: 55px;
+                    background: url('../../../public/imgs/icon-search.png') no-repeat center;
+                    background-size: 19px 19px;
+                }
+            }
+        }
     }
 }
 .my-cart {
