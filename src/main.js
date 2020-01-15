@@ -30,7 +30,7 @@ axios.interceptors.response.use(function (response) {
     return res.data
   } else if (res.status === 10) {
     if (location.hash !== '#/index' || location.hash !== '#/home') {
-      window.location.href = '/#/login'
+      // window.location.href = '/#/login'
     }
   } else {
     alert(res.msg)
