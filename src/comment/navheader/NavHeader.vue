@@ -8,9 +8,10 @@
                     <a href="#">协议规则</a>
                 </div>
                 <div class="topbar-user">
-                    <a href="#">登录</a>
-                    <a href="#">我的订单</a>
-                    <a href="#" class="my-cart">
+                    <a href="javascript:;" v-if="userName">{{userName}}</a>
+                    <a href="javascript:;" v-if="!userName" @click="login">登录</a>
+                    <a href="javascript:;">我的订单</a>
+                    <a href="javascript:;" class="my-cart" @click="goToCart">
                         <span class="icon-cart"></span>购物车
                     </a>
                 </div>
@@ -26,15 +27,26 @@
                     <div class="item-menu">
                         <!-- 如果文字就用span做块级 -->
                         <span>小米手机</span>
-                        <div class="children"></div>
+                        <div class="children">
+                            <ul>
+                                <li class="product" v-for="item in productList" :key="item.id">
+                                    <a :href="'/#/product/'+item.id">
+                                        <img class="pro-img" :src="item.mainImage" alt="#" />
+                                        <div class="pro-name">{{item.name}}</div>
+                                        <div class="pro-price">{{item.price | currency}}</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="item-menu">
                         <span>RedMi红米</span>
-                        <div class="children"></div>
                     </div>
                     <div class="item-menu">
                         <span>电视</span>
-                        <div class="children"></div>
+                        <div class="children">
+                            <img src alt />
+                        </div>
                     </div>
                 </div>
                 <div class="header-search">
@@ -49,10 +61,60 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'NavHeader',
+  data () {
+    return {
+      productList: [],
+      //   currency: ''
+      userName: ''
+    }
+  },
+  //   过滤器，用于一些常见的文本格式化
+  filters: {
+    currency: function (value) {
+      // 判空处理！
+      if (!value) {
+        return '0.00'
+      }
+      //   return 格式化数值量
+      return '￥' + value.toFixed(2) + '元'
+    }
+  },
+  mounted () {
+    this.getProduction()
+  },
+  methods: {
+    getProduction () {
+      this.axios
+        .get('/products', {
+          params: {
+            categoryId: '100012',
+            pageSize: 6
+          }
+        })
+        .then(result => {
+          //   前端截取部分数据
+          if (result.list.length >= 6) {
+            //   slice(截取部分数据)
+            this.productList = result.list.slice(0, 6)
+          }
+        //   this.productList = result.list
+        })
+    },
+    login () {
+      this.$router.push('/login')
+    },
+    goToCart () {
+      this.$router.push('/cart')
+    }
+  }
+}
 </script>
 <style lang ='scss' scoped>
-@import 'assets/scss/mixin.scss';
+@import "assets/scss/mixin.scss";
+@import "assets/scss/config.scss";
+@import "assets/scss/base.scss";
 /* 一般用前后对接，如果多个子级则往前。公共、独特用单个写。最内层多直接对标签设置样式。
     之前分模块再&,控制三级之内，公共、独特用单个写。*/
 .nav-topbar {
@@ -61,9 +123,9 @@ export default {}
     background-color: #333333;
     color: #b0b0b0;
     .container {
-        width: 1226px;
+        /* width: 1226px;
         margin-right: auto;
-        margin-left: auto;
+        margin-left: auto; */
         /* display: flex;
         justify-content: space-between; */
         @include flex();
@@ -78,11 +140,12 @@ export default {}
     height: 112px;
     line-height: 112px;
     .container {
-        width: 1226px;
+        /* width: 1226px; */
         height: 112px;
-        margin-right: auto;
-        margin-left: auto;
+        /* margin-right: auto;
+        margin-left: auto; */
         @include flex();
+        position: relative;
         .header-logo {
             display: inline-block;
             width: 55px;
@@ -105,7 +168,12 @@ export default {}
                     background: url("../../../public/imgs/mi-logo.png")
                         no-repeat center;
                     background-size: 55px; */
-                    @include bgImg(55px, 55px,"../../../public/imgs/mi-logo.png",55px);
+                    @include bgImg(
+                        55px,
+                        55px,
+                        "../../../public/imgs/mi-logo.png",
+                        55px
+                    );
                     transition: margin 0.2s;
                 }
                 &:after {
@@ -116,7 +184,12 @@ export default {}
                     background: url("../../../public/imgs/mi-home.png")
                         no-repeat center;
                     background-size: 55px; */
-                    @include bgImg(55px, 55px,"../../../public/imgs/mi-logo.png",55px);
+                    @include bgImg(
+                        55px,
+                        55px,
+                        "../../../public/imgs/mi-home.png",
+                        55px
+                    );
                 }
                 &:hover:before {
                     margin-left: -55px;
@@ -128,21 +201,100 @@ export default {}
             display: inline-block;
             width: 643px;
             padding-left: 209px;
-            .item-menu{
+            .item-menu {
                 display: inline-block;
                 color: #333333;
                 line-height: 112px;
-                font-weight:bold;
-                font-size:16px;
+                font-weight: bold;
+                font-size: 16px;
                 margin-right: 20px;
+                &:hover {
+                    color: $colorA;
+                    .children {
+                        height: 220px;
+                        opacity: 1;
+                        z-index: 9;
+                        background-color: #fff;
+                    }
+                }
+                .children {
+                    z-index: 9;
+                    opacity: 0;
+                    position: absolute;
+                    top: 112px;
+                    left: 0;
+                    width: 1226px;
+                    height: 0;
+                    border-top: 1px solid #e5e5e5;
+                    box-shadow: 0px 7px 6px 0px rgba(0, 0, 0, 0.11);
+                    /* 绝对定位不能与flex布局同设置 */
+                    /* @include flex(); */
+                    overflow: hidden;
+                    ul{
+                        @include flex();
+                        .product {
+                            position: relative;
+                            display: inline-block;
+                            flex: 1;
+                            /* width: 16.6%; */
+                            height: 220px;
+                            font-size: 12px;
+                            line-height: 12px;
+                            text-align: center;
+                            a {
+                                display: inline-block;
+                            }
+                            img {
+                                width: auto;
+                                height: 111px;
+                                margin-top: 15px;
+                            }
+                            .pro {
+                                &-img {
+                                    /* width: 100%; */
+                                    /* 图片一直影响外围容器，不能均分宽度，因此需要知道图片高度 */
+                                    /* display: inline-block;
+                                    width: auto; */
+                                    height: 137px;
+                                    /* margin-top:26px; */
+                                }
+                                &-name,
+                                &-price {
+                                    display: block;
+                                    height: 30px;
+                                    line-height: 30px;
+                                    text-align: center;
+                                }
+                                &-name {
+                                    color: $colorB;
+                                }
+                                &-price {
+                                    color: $colorA;
+                                }
+                            }
+                            &::after {
+                                content: "";
+                                position: absolute;
+                                top: 29px;
+                                right: 0;
+                                border: 0.3px solid $colorF;
+                                height: 100px;
+                                width: 0.3px;
+                            }
+                            &:last-child:after {
+                                display: none;
+                            }
+                        }
+                    }
+                }
             }
         }
         .header-search {
-            .wrapper{
+            .wrapper {
                 height: 50px;
                 border: 1px solid #e0e0e0;
                 @include flex();
-                input{
+                input {
                     display: inline-block;
                     height: 100%;
                     border: none;
@@ -150,13 +302,18 @@ export default {}
                     padding-left: 13px;
                     box-sizing: border-box;
                 }
-                a{
+                a {
                     /* display: inline-block;
                     width: 55px;
                     height: 55px;
                     background: url('../../../public/imgs/icon-search.png') no-repeat center;
                     background-size: 19px 19px; */
-                    @include bgImg(55px, 55px,"../../../public/imgs/icon-search.png",19px);
+                    @include bgImg(
+                        55px,
+                        55px,
+                        "../../../public/imgs/icon-search.png",
+                        19px
+                    );
                 }
             }
         }
@@ -175,7 +332,12 @@ export default {}
         background: url("../../../public/imgs/icon-cart-checked.png") no-repeat
             center;
         background-size: contain; */
-        @include bgImg(16px, 12px,"../../../public/imgs/icon-cart-checked.png",contain);
+        @include bgImg(
+            16px,
+            12px,
+            "../../../public/imgs/icon-cart-checked.png",
+            contain
+        );
         margin-right: 4px;
     }
 }

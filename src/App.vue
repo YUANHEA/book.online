@@ -33,12 +33,12 @@ export default {
   methods: {
     getUser () {
       this.axios.get('/user').then(res => {
-        console.log('user', res)
+        // console.log('user', res)
       })
     },
     getCartCount () {
       this.axios.get('/carts').then(res => {
-        console.log('carts', res)
+        // console.log('carts', res)
       })
     }
   }
@@ -46,6 +46,6 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "./assets/scss/reset.scss";
-@import "./assets/scss/config.scss";
+@import "assets/scss/reset.scss";
+@import "assets/scss/config.scss";
 </style>
