@@ -2,6 +2,7 @@
     <div>
         <nav-header></nav-header>
         <home-swiper></home-swiper>
+        <ads-box></ads-box>
         <service-bar></service-bar>
         <nav-footer></nav-footer>
     </div>
@@ -10,6 +11,7 @@
 <script>
 import NavHeader from '@/comment/navheader/NavHeader.vue'
 import HomeSwiper from './component/Swiper'
+import AdsBox from './component/AdsBox'
 import ServiceBar from '@/comment/servicebar/ServiceBar.vue'
 import NavFooter from '@/comment/navfooter/NavFooter.vue'
 export default {
@@ -17,6 +19,7 @@ export default {
   components: {
     NavHeader,
     HomeSwiper,
+    AdsBox,
     ServiceBar,
     NavFooter
   }
