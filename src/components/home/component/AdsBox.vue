@@ -4,6 +4,11 @@
             <a :href="'/#/product/'+item.id" v-for="item in adsList" :key="item.id">
                 <img :src="item.img" alt />
             </a>
+            <div class="banner">
+                <a href="/#/product/30">
+                    <img v-lazy="'/static/imgs/banner-1.png'" alt />
+                </a>
+            </div>
         </div>
     </div>
 </template>
@@ -44,17 +49,19 @@ export default {
 @import "assets/scss/base.scss";
 .adsbox {
     margin-top: 14px;
-    .container{
+    .container {
         @include flex();
         a {
-            /* display: inline-block;
-            flex: 1; */
             img {
                 width: 296px;
                 height: 167px;
             }
         }
+        .banner{
+            img{
+                width: 100%;
+            }
+        }
     }
-
 }
 </style>
