@@ -4,9 +4,11 @@
             <a :href="'/#/product/'+item.id" v-for="item in adsList" :key="item.id">
                 <img :src="item.img" alt />
             </a>
+        </div>
+        <div class="container">
             <div class="banner">
                 <a href="/#/product/30">
-                    <img v-lazy="'/static/imgs/banner-1.png'" alt />
+                    <img src="/static/imgs/banner-1.png" alt />
                 </a>
             </div>
         </div>
@@ -52,13 +54,14 @@ export default {
     .container {
         @include flex();
         a {
+            margin-bottom: 31px;
             img {
                 width: 296px;
                 height: 167px;
             }
         }
-        .banner{
-            img{
+        .banner {
+            img {
                 width: 100%;
             }
         }
