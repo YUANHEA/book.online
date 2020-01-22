@@ -17,7 +17,7 @@ export default {
     // vue-axios将axios挂载到vue上,这样就能通过this.axios获取到axios
     // public是根路径,不用public/,直接/
     // 请求static/mock
-    // this.axios.get('api/login.json').then((res) => {
+    // this.axios.get('/login.json').then((res) => {
     // // this.axios.get('api/user/login.json').then(res => {
     //   this.res = res
     //   console.log('res', this.res)
@@ -28,12 +28,12 @@ export default {
     //   console.log('res', this.res)
     // })
     this.getUser()
-    this.getCartCount()
+    // this.getCartCount()
   },
   methods: {
     getUser () {
-      this.axios.get('/user').then(res => {
-        // console.log('user', res)
+      this.axios.get('/test1').then(res => {
+        console.log('user', res)
       })
     },
     getCartCount () {

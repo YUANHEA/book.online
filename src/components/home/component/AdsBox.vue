@@ -61,6 +61,7 @@ export default {
             }
         }
         .banner {
+          margin-bottom: 50px;
             img {
                 width: 100%;
             }

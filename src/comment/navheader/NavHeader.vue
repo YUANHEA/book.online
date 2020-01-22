@@ -82,7 +82,7 @@ export default {
     }
   },
   mounted () {
-    this.getProduction()
+    // this.getProduction()
   },
   methods: {
     getProduction () {
