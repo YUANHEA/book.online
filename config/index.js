@@ -16,9 +16,9 @@ module.exports = {
       // 每个页面接口组成，baseUrl+内容文件地址
       '/api' : {
         // target: 'http://localhost:8080', // 将对/api文件请求，转发到http://localhost:8080，即本机服务器80端口上。
-        // target: 'http://mall-pre.springboot.cn', // 将对/api文件请求，转发到http://localhost:8080，即本机服务器80端口上。
+        target: 'http://mall-pre.springboot.cn', // 将对/api文件请求，转发到http://localhost:8080，即本机服务器80端口上。
         // target: 'http://120.24.70.157', // 将对/api文件请求，转发到http://localhost:8080，即本机服务器80端口上。http://mall-pre.springboot.cn
-        target: 'http://120.24.70.157:8801', // 将对/api文件请求，转发到http://localhost:8080，即本机服务器80端口上。http://mall-pre.springboot.cn
+        // target: 'http://120.24.70.157:8801', // 将对/api文件请求，转发到http://localhost:8080，即本机服务器80端口上。http://mall-pre.springboot.cn
         changeOrigin:true,
         pathRewrite:{
           // '^/api' : '/static/mock' // 将api开头的文件请求，替换成/static/mock路径

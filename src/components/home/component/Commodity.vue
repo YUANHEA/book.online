@@ -44,7 +44,7 @@ export default {
     }
   },
   mounted () {
-    // this.getProduct()
+    this.getProduct()
   },
   computed: {},
   methods: {
