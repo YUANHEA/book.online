@@ -17,12 +17,15 @@
                     <div class="input">
                         <input type="password" placeholder="请输入密码" v-model="password" />
                     </div>
+                     <div class="input">
+                        <input type="email" placeholder="请输入邮箱" v-model="email" />
+                    </div>
                     <div class="btn-box">
                         <a href="javascript:;" class="btn" @click="login">登录</a>
                     </div>
                     <div class="tips">
                         <div class="sms" @click="register">手机短信登录/注册</div>
-                        <div class="reg">
+                        <div class="reg" @click="logout">
                             立即注册
                             <span>|</span>忘记密码？
                         </div>
@@ -54,6 +57,7 @@ export default {
     return {
       username: '',
       password: '',
+      email: '',
       userId: ''
     }
   },
@@ -64,14 +68,15 @@ export default {
     // }
     login () {
       // 因为data中这些量都是挂载到this上，this指vue实例。因此对this进行解构赋值,取出相应属性量，省变量定义。
-      let { username, password } = this
+      let { username, password, email } = this
       this.axios
         .post('/user/login', {
           // 形参不用定义
           // 在接口中传的参数左边为形参，因此不用定义。
           // 当左右相同，es6语法只需写一个。
           username,
-          password
+          password,
+          email
         })
         .then(res => {
           this.$cookie.set('userId', res.id, { expires: '1Y' })
@@ -79,14 +84,43 @@ export default {
         })
     },
     register () {
-      let { username, password } = this
+      let { username, password, email } = this
       this.axios
+        // .post('/user/register', {
+        //   username: 'admin1',
+        //   password: 'admin1',
+        //   email: 'admin1@163.com'
+        // })
+      //   this.axios.post('/user/register', {
+      //     username: 'admin1',
+      //     password: 'admin1',
+      //     email: 'admin1@163.com'
+      //   })
         .post('/user/register', {
           username,
-          password
+          password,
+          email
         })
         .then(res => {
-          alert('注册成功')
+        //   alert('注册成功')
+          console.log(res)
+        })
+    },
+    logout () {
+      // 因为data中这些量都是挂载到this上，this指vue实例。因此对this进行解构赋值,取出相应属性量，省变量定义。
+      let { username, password, email } = this
+      this.axios
+        .post('/user/login', {
+          // 形参不用定义
+          // 在接口中传的参数左边为形参，因此不用定义。
+          // 当左右相同，es6语法只需写一个。
+          username,
+          password,
+          email
+        })
+        .then(res => {
+          this.$cookie.set('userId', res.id, { expires: '1Y' })
+          this.$router.push('/index')
         })
     }
   }
