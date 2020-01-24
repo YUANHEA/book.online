@@ -12,8 +12,9 @@
                 <div class="list-box">
                     <!-- 多行列，用多维数组做数据，vfor循环多层div/ulli。 -->
                     <div class="list" v-for="(items,index) in productList" :key="index">
-                        <div class="item"  v-for="item in items" :key="item.id">
-                            <span>新品</span>
+                        <div class="item"  v-for="(item,index) in items" :key="index">
+                            <!-- 动态绑定样式，:class="{'new-pro': index % 2==0}"。有{'单引号':键值对}，大括号，键值对 -->
+                            <span :class="{'new-pro': index % 2==0}">新品</span>
                             <div class="item-img">
                                 <img
                                     :src="item.mainImage"
@@ -21,9 +22,9 @@
                                 />
                             </div>
                             <div class="item-info">
-                                <h3>{{item.name}}</h3>
+                                <h3 >{{item.name}}</h3>
                                 <p>{{item.subtitle}}</p>
-                                <p class="price">{{item.price}}</p>
+                                <p class="price">{{item.price}}元</p>
                             </div>
                         </div>
                     </div>
@@ -44,7 +45,7 @@ export default {
     }
   },
   mounted () {
-    // this.getProduct()
+    this.getProduct()
   },
   computed: {},
   methods: {
@@ -72,8 +73,12 @@ export default {
 @import "assets/scss/config.scss";
 .commodity {
     padding-top: 30px;
+    padding-bottom: 50px;
     background-color: $colorJ;
     .container {
+        h2{
+            margin-bottom: 20px;
+        }
         .wrapper {
             @include flex();
             .banner-left {
@@ -104,6 +109,13 @@ export default {
                             height: 24px;
                             line-height: 24px;
                             font-size: 14px;
+                            color: white;
+                            &.new-pro{
+                                background-color: #7ECF68;
+                            }
+                            &.kill-pro{
+                                background-color: #E82626;
+                            }
                         }
                         .item-img {
                             width: 100%;
@@ -124,8 +136,20 @@ export default {
                                 margin-bottom: 13px;
                             }
                             .price{
+                                display: inline-block;
+                                font-size: 14px;
                                 color: #f20a0a;
                                 margin-bottom: 13px;
+                                font-weight: 700;
+                                height: 30px;
+                                line-height: 30px;
+                                /* vertical-align: middle; */
+                                &::after{
+                                    content: ' ';
+                                    @include bgImg(22px,22px,'/static/imgs/icon-cart-hover.png');
+                                    margin-left: 5px;
+                                    vertical-align: middle;
+                                }
                             }
                         }
                     }
