@@ -24,7 +24,7 @@
                             <div class="item-info">
                                 <h3 >{{item.name}}</h3>
                                 <p>{{item.subtitle}}</p>
-                                <p class="price">{{item.price}}元</p>
+                                <p class="price" @click="addCart()">{{item.price}}元</p>
                             </div>
                         </div>
                     </div>
@@ -63,6 +63,9 @@ export default {
           this.productList = [result.list.slice(0, 4), result.list.slice(4, 8)]
         //   console.log(this.productList)
         })
+    },
+    addCart () {
+      this.$emit('addCart')
     }
   }
 }
