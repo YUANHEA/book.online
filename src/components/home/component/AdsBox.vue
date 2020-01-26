@@ -2,13 +2,13 @@
     <div class="adsbox">
         <div class="container">
             <a :href="'/#/product/'+item.id" v-for="item in adsList" :key="item.id">
-                <img :src="item.img" alt />
+                <img v-lazy="item.img" alt />
             </a>
         </div>
         <div class="container">
             <div class="banner">
                 <a href="/#/product/30">
-                    <img src="/static/imgs/banner-1.png" alt />
+                    <img v-lazy="'/static/imgs/banner-1.png'" alt />
                 </a>
             </div>
         </div>

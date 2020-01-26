@@ -4,13 +4,25 @@
 .modal {
   @include position(fixed);
   z-index: 10;
-
+  transition: all 1s;
   .mask {
     @include position(fixed);
     background-color: $colorI;
     opacity: .5;
   }
-
+  // 显示
+  &.slide-enter-active {
+    top: 0;
+  }
+  // 消失
+  &.slide-leave-active {
+    top: -100%;
+  }
+  // 消失
+  &.slide-enter, &.slide-fade-leave-to
+  /* .slide-fade-leave-active for below version 2.1.8 */ {
+    top: -100%;
+  }
   .dialog {
     @include position(absolute, 40%, 50%, 660px, auto);
     background-color: $colorG;
@@ -20,11 +32,12 @@
       height: 60px;
       line-height: 60px;
       background-color: $colorJ;
-      font-size: 16px;
+      font-size: $fontI;
       padding: 0 25px;
 
       .icon-close {
         @include positionImg(absolute, 23px, 25px, 14px, 14px, '/static/imgs/icon-close.png');
+        transition: transform .3s;
         &:hover{
             transform: scale(1.5);
         }

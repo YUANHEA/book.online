@@ -33,7 +33,7 @@ export default {
   name: 'Home',
   data () {
     return {
-      showMode: true
+      showMode: false
     }
   },
   components: {

@@ -7,6 +7,7 @@ import axios from 'axios'
 /* eslint-disable */
 import VueAxios from 'vue-axios'
 import VueCookie from 'vue-cookie'
+import VueLazyload from 'vue-lazyload'
 // import env from './env';
 const mock = false
 if (mock) {
@@ -14,6 +15,9 @@ if (mock) {
 }
 Vue.use(VueAxios, axios)
 Vue.use(VueCookie)
+Vue.use(VueLazyload, {
+  loading: '/static/imgs/loading-svg/loading-bars.svg'
+})
 Vue.config.productionTip = false
 // 根据前端的跨域方式做调整,baseURL
 axios.defaults.baseURL = '/api'

@@ -6,29 +6,25 @@
                 <!-- 但凡有flex子级，必定有flex父级 -->
                 <div class="banner-left">
                     <a href>
-                        <img src="static/imgs/mix-alpha.jpg" alt />
+                        <img v-lazy="'static/imgs/mix-alpha.jpg'" alt />
                     </a>
                 </div>
                 <div class="list-box">
                     <!-- 多行列，用多维数组做数据，vfor循环多层div/ulli。 -->
                     <div class="list" v-for="(items,index) in productList" :key="index">
-                        <div class="item"  v-for="(item,index) in items" :key="index">
+                        <div class="item" v-for="(item,index) in items" :key="index">
                             <!-- 动态绑定样式，:class="{'new-pro': index % 2==0}"。有{'单引号':键值对}，大括号，键值对 -->
                             <span :class="{'new-pro': index % 2==0}">新品</span>
                             <div class="item-img">
-                                <img
-                                    :src="item.mainImage"
-                                    alt="#"
-                                />
+                                <img v-lazy="item.mainImage" alt="#" />
                             </div>
                             <div class="item-info">
-                                <h3 >{{item.name}}</h3>
+                                <h3>{{item.name}}</h3>
                                 <p>{{item.subtitle}}</p>
-                                <p class="price" @click="addCart()">{{item.price}}元</p>
+                                <p class="price" @click="addCart(item.id)">{{item.price}}元</p>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -60,12 +56,26 @@ export default {
         .then(result => {
           // 二维数组书写
           result.list = result.list.slice(6, 14)
-          this.productList = [result.list.slice(0, 4), result.list.slice(4, 8)]
-        //   console.log(this.productList)
+          this.productList = [
+            result.list.slice(0, 4),
+            result.list.slice(4, 8)
+          ]
+          //   console.log(this.productList)
         })
     },
-    addCart () {
+    addCart (productId) {
       this.$emit('addCart')
+    //   由于未做登陆功能，后台会返回10,这里先不做
+    //   this.axios
+    //     .post('/carts', {
+    //       productId: productId,
+    //       selected: true
+    //     })
+    //     .then(() => {})
+    //     .catch(() => {
+    //       console.log('1')
+    //       this.$emit('addCart')
+    //     })
     }
   }
 }
@@ -79,7 +89,7 @@ export default {
     padding-bottom: 50px;
     background-color: $colorJ;
     .container {
-        h2{
+        h2 {
             margin-bottom: 20px;
         }
         .wrapper {
@@ -99,25 +109,25 @@ export default {
                 /* @include flex(); */
                 .list {
                     margin-bottom: 14px;
-                     @include flex();
+                    @include flex();
                     .item {
                         width: 236px;
                         /* 如果容器里面，全部水平/垂直居中，那么给容器设置居中 */
                         height: 302px;
                         text-align: center;
                         background-color: #fff;
-                        span{
+                        span {
                             display: inline-block;
                             width: 67px;
                             height: 24px;
                             line-height: 24px;
                             font-size: 14px;
                             color: white;
-                            &.new-pro{
-                                background-color: #7ECF68;
+                            &.new-pro {
+                                background-color: #7ecf68;
                             }
-                            &.kill-pro{
-                                background-color: #E82626;
+                            &.kill-pro {
+                                background-color: #e82626;
                             }
                         }
                         .item-img {
@@ -128,17 +138,17 @@ export default {
                                 height: 100%;
                             }
                         }
-                        .item-info{
-                            h3{
+                        .item-info {
+                            h3 {
                                 font-size: 14px;
                                 font-weight: 700;
                                 margin-bottom: 6px;
                             }
-                            p{
+                            p {
                                 color: $colorD;
                                 margin-bottom: 13px;
                             }
-                            .price{
+                            .price {
                                 display: inline-block;
                                 font-size: 14px;
                                 color: #f20a0a;
@@ -147,9 +157,13 @@ export default {
                                 height: 30px;
                                 line-height: 30px;
                                 /* vertical-align: middle; */
-                                &::after{
-                                    content: ' ';
-                                    @include bgImg(22px,22px,'/static/imgs/icon-cart-hover.png');
+                                &::after {
+                                    content: " ";
+                                    @include bgImg(
+                                        22px,
+                                        22px,
+                                        "/static/imgs/icon-cart-hover.png"
+                                    );
                                     margin-left: 5px;
                                     vertical-align: middle;
                                 }

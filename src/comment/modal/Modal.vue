@@ -1,25 +1,27 @@
 <template>
-    <div class="modal" v-show="showMode">
-        <div class="mask"></div>
-        <div class="dialog">
-            <div class="dialog-header">
-              <span>{{title}}</span>
-              <!-- a标签做点击外层/直接做点击元素比如btn -->
-              <a class="icon-close" href="javascript:;" @click="cancel()"></a>
-            </div>
-            <div class="dialog-body">
-              <slot name="body"></slot>
-            </div>
-            <div class="dialog-footer">
-              <a class="btn" href="javascript:;" v-if="btnType==1" @click="surce()">{{sureText}}</a>
-              <a class="btn" href="javascript:;" v-if="btnType==2" @click="cancel()">{{cancelText}}</a>
-              <div class="btn-group" v-if="btnType==3">
-                <a class="btn" href="javascript:;">{{sureText}}</a>
-                <a class="btn" href="javascript:;" @click="cancel()">{{cancelText}}</a>
+    <transition name="slide">
+        <div class="modal" v-show="showMode">
+          <div class="mask"></div>
+          <div class="dialog">
+              <div class="dialog-header">
+                <span>{{title}}</span>
+                <!-- a标签做点击外层/直接做点击元素比如btn -->
+                <a class="icon-close" href="javascript:;" @click="cancel()"></a>
               </div>
-            </div>
-        </div>
-    </div>
+              <div class="dialog-body">
+                <slot name="body"></slot>
+              </div>
+              <div class="dialog-footer">
+                <a class="btn" href="javascript:;" v-if="btnType==1" @click="surce()">{{sureText}}</a>
+                <a class="btn" href="javascript:;" v-if="btnType==2" @click="cancel()">{{cancelText}}</a>
+                <div class="btn-group" v-if="btnType==3">
+                  <a class="btn" href="javascript:;">{{sureText}}</a>
+                  <a class="btn" href="javascript:;" @click="cancel()">{{cancelText}}</a>
+                </div>
+              </div>
+          </div>
+      </div>
+    </transition>
 </template>
 
 <script>
