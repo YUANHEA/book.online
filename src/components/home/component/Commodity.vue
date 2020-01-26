@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'Commodity',
   components: {},
@@ -65,18 +66,26 @@ export default {
     },
     addCart (productId) {
       this.$emit('addCart')
-    //   由于未做登陆功能，后台会返回10,这里先不做
-    //   this.axios
-    //     .post('/carts', {
-    //       productId: productId,
-    //       selected: true
-    //     })
-    //     .then(() => {})
-    //     .catch(() => {
-    //       console.log('1')
-    //       this.$emit('addCart')
-    //     })
-    }
+      //   由于未做登陆功能，后台会返回10,这里先不做
+      this.axios
+        .post('/carts', {
+          productId: productId,
+          selected: true
+        })
+        .then((res) => {
+          console.log(res)
+          //   this.$store.dispatch('saveCartCount', res.cartTotalQuantity)
+          this.saveCartCount(res.cartTotalQuantity)
+        })
+        .catch(() => {
+          console.log('1')
+          this.$emit('addCart')
+        })
+    },
+    // 存储值
+    ...mapActions([
+      'saveCartCount' // also supports payload `this.nameOfAction(amount)`
+    ])
   }
 }
 </script>

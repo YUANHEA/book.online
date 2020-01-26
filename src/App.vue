@@ -27,18 +27,20 @@ export default {
     //   this.res = res
     //   console.log('res', this.res)
     // })
-    // this.getUser()
+    this.getUser()
     this.getCartCount()
   },
   methods: {
     getUser () {
-      this.axios.get('/test1').then(res => {
+      this.axios.get('/user').then(res => {
         console.log('user', res)
+        this.$store.dispatch('saveUserName', res.username)
       })
     },
     getCartCount () {
       this.axios.get('/carts').then(res => {
-        // console.log('carts', res)
+        console.log('carts', res)
+        this.$store.dispatch('saveCartCount', res.cartTotalQuantity)
       })
     }
   }

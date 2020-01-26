@@ -48,6 +48,7 @@
     </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'login',
   data () {
@@ -75,9 +76,16 @@ export default {
         })
         .then(res => {
           this.$cookie.set('userId', res.id, { expires: '1Y' })
-          this.$router.push('/index')
+          this.$router.push('/home')
+          //   this.$store.dispatch('saveUserName', res.username)
+          this.saveUserName(res.username)
         })
     },
+    // 存储值
+    ...mapActions([
+      'saveUserName' // also supports payload `this.nameOfAction(amount)`
+    ]),
+
     register () {
       let { username, password } = this
       this.axios

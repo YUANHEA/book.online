@@ -8,6 +8,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueCookie from 'vue-cookie'
 import VueLazyload from 'vue-lazyload'
+import store from './store';
 // import env from './env';
 const mock = false
 if (mock) {
@@ -34,7 +35,7 @@ axios.interceptors.response.use(function (response) {
     return res.data
   } else if (res.status === 10) { 
     if (location.hash !== '#/index' || location.hash !== '#/home') {
-      // window.location.href = '/#/login'
+      window.location.href = '/#/login'
     }
   } else {
     console.log(res.status)
@@ -47,6 +48,7 @@ axios.interceptors.response.use(function (response) {
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'

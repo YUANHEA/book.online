@@ -12,7 +12,7 @@
                     <a href="javascript:;" v-if="!userName" @click="login">登录</a>
                     <a href="javascript:;">我的订单</a>
                     <a href="javascript:;" class="my-cart" @click="goToCart">
-                        <span class="icon-cart"></span>购物车
+                        <span class="icon-cart"></span>购物车{{cartCount}}
                     </a>
                 </div>
             </div>
@@ -62,13 +62,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'NavHeader',
   data () {
     return {
-      productList: [],
+      productList: []
       //   currency: ''
-      userName: ''
+      //   userName: ''
+      //   userName: this.$store.state.userName
     }
   },
   //   过滤器，用于一些常见的文本格式化
@@ -84,6 +86,21 @@ export default {
   },
   mounted () {
     this.getProduction()
+    // console.log(this.userName)
+  },
+  computed: {
+    // userName () {
+    // //   console.log(this.$store.state.username)
+    //   return this.$store.state.userName
+    // },
+    // cartCount () {
+    // //   console.log(this.$store.state.username)
+    //   return this.$store.state.cartCount
+    // }
+    ...mapState([
+      'userName', 'cartCount'
+    ])
+
   },
   methods: {
     getProduction () {
