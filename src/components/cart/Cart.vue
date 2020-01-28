@@ -45,7 +45,7 @@
           </div>
           <div class="total fr">
             合计：<span>{{cartTotalPrice}}</span>元
-            <a href="javascript:;" class="btn">去结算</a>
+            <a href="javascript:;" class="btn" @click="order">去结算</a>
           </div>
         </div>
       </div>
@@ -55,6 +55,7 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 import OrderHeader from '@/comment/orderheader/OrderHeader'
 import ServiceBar from '@/comment/servicebar/ServiceBar'
 import NavFooter from '@/comment/navfooter/NavFooter'
@@ -78,10 +79,6 @@ export default{
     this.getCartList()
   },
   methods: {
-    // 购物车下单
-    order () {
-      this.$router.push('/order/confirm')
-    },
     // 渲染数据
     renderData (res) {
       this.list = res.cartProductVoList
@@ -90,6 +87,10 @@ export default{
       this.cartTotalQuantity = res.cartTotalQuantity
       this.checkedNum = this.list.filter(item => item.productSelected).length
     },
+    // 存储值
+    ...mapActions([
+      'saveCartCount' // also supports payload `this.nameOfAction(amount)`
+    ]),
     // 获取购物车信息
     getCartList () {
       this.axios.get('/carts').then((res) => {
@@ -130,13 +131,20 @@ export default{
       }
       this.axios.put(`/carts/${item.productId}`, {quantity, selected}).then((res) => {
         this.renderData(res)
+        this.saveCartCount(res.cartTotalQuantity)
       })
     },
     // 删除商品！
     deleteProduct (item) {
       this.axios.delete(`/carts/${item.productId}`).then((res) => {
         this.renderData(res)
+        this.saveCartCount(res.cartTotalQuantity)
       })
+    },
+    // 购物车下单
+    order () {
+      let isCheck = this.list.every(item => !item.productSelected)
+      isCheck ? alert('请选择一件商品') : this.$router.push('/order/confirm')
     }
   }
 }
