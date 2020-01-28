@@ -78,7 +78,6 @@ export default {
           this.saveCartCount(res.cartTotalQuantity)
         })
         .catch(() => {
-          console.log('1')
           this.$emit('addCart')
         })
     },

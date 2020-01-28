@@ -37,6 +37,8 @@ axios.interceptors.response.use(function (response) {
     if (location.hash !== '#/index' || location.hash !== '#/home') {
       window.location.href = '/#/login'
     }
+    // 但凡不是正常返回数据，都应该在错误处理最后设置错误抛出。这样就不会进入then中。
+    return Promise.reject(res)
   } else {
     console.log(res.status)
     alert(res.msg)

@@ -1,6 +1,11 @@
 <template>
     <div>
         <nav-header></nav-header>
+        <product-param>
+          <template v-slot:buy>
+            <button class="btn">立即购买</button>
+          </template>
+        </product-param>
         <home-swiper></home-swiper>
         <ads-box></ads-box>
         <Commodity @addCart="addCart"></Commodity>
@@ -23,6 +28,7 @@
 
 <script>
 import NavHeader from '@/comment/navheader/NavHeader.vue'
+import ProductParam from '@/comment/productparam/ProductParam.vue'
 import HomeSwiper from './component/Swiper'
 import AdsBox from './component/AdsBox'
 import Commodity from './component/Commodity'
@@ -38,6 +44,7 @@ export default {
   },
   components: {
     NavHeader,
+    ProductParam,
     HomeSwiper,
     AdsBox,
     Commodity,

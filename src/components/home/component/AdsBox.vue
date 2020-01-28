@@ -1,7 +1,7 @@
 <template>
     <div class="adsbox">
         <div class="container">
-            <a :href="'/#/product/'+item.id" v-for="item in adsList" :key="item.id">
+            <a :href="'/#/detail/'+item.id" v-for="item in adsList" :key="item.id">
                 <img v-lazy="item.img" alt />
             </a>
         </div>
