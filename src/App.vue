@@ -33,13 +33,13 @@ export default {
   methods: {
     getUser () {
       this.axios.get('/user').then(res => {
-        console.log('user', res)
+        // console.log('user', res)
         this.$store.dispatch('saveUserName', res.username)
       })
     },
     getCartCount () {
       this.axios.get('/carts').then(res => {
-        console.log('carts', res)
+        // console.log('carts', res)
         this.$store.dispatch('saveCartCount', res.cartTotalQuantity)
       })
     }
