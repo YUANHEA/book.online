@@ -19,7 +19,7 @@
           <ul class="cart-item-list">
             <li class="cart-item" v-for="(item, index) in list" :key="index">
               <div class="item-check">
-                <span class="checkbox" :class="{'checked': item.productSelected}"></span>
+                <span class="checkbox" :class="{'checked': item.productSelected}" @click="updateCart (item)"></span>
               </div>
               <div class="item-name">
                 <img src="/static/imgs/item-box-3-1.png" alt="">
@@ -28,13 +28,13 @@
               <div class="item-price">{{item.productPrice+'元'}}</div>
               <div class="item-num">
                 <div class="num-box">
-                  <a href="javascript:;">-</a>
+                  <a href="javascript:;" @click="updateCart (item, '-')">-</a>
                   <span>{{item.quantity}}</span>
-                  <a href="javascript:;">+</a>
+                  <a href="javascript:;" @click="updateCart (item, '+')">+</a>
                 </div>
               </div>
               <div class="item-total">{{item.productTotalPrice}}元</div>
-              <div class="item-del"></div>
+              <div class="item-del" @click="deleteProduct (item)"></div>
             </li>
           </ul>
         </div>
@@ -105,6 +105,36 @@ export default{
     toggleAll () {
       let url = this.selectedAll ? '/carts/unSelectAll' : '/carts/selectAll'
       this.axios.put(url).then((res) => {
+        this.renderData(res)
+      })
+    },
+    // 更新购物车信息
+    updateCart (item, type) {
+      let quantity = item.quantity
+      // eslint-disable-next-line no-unused-vars
+      let selected = item.productSelected
+      if (type === '-') {
+        if (quantity === 1) {
+          alert('商品至少保留一件')
+          return
+        }
+        quantity--
+      } else if (type === '+') {
+        if (quantity > item.productStock) {
+          alert('购买数量不能超过库存数量')
+          return
+        }
+        quantity++
+      } else {
+        selected = !item.productSelected
+      }
+      this.axios.put(`/carts/${item.productId}`, {quantity, selected}).then((res) => {
+        this.renderData(res)
+      })
+    },
+    // 删除商品！
+    deleteProduct (item) {
+      this.axios.delete(`/carts/${item.productId}`).then((res) => {
         this.renderData(res)
       })
     }
