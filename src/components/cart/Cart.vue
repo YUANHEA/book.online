@@ -9,7 +9,7 @@
       <div class="container">
         <div class="cart-box">
           <ul class="cart-item-head">
-            <li class="col-1"><span class="checkbox" :class="{'checked': selectedAll}"></span>全选</li>
+            <li class="col-1"><span class="checkbox" :class="{'checked': selectedAll}" @click="toggleAll"></span>全选</li>
             <li class="col-3">商品名称</li>
             <li class="col-1">单价</li>
             <li class="col-2">数量</li>
@@ -82,13 +82,30 @@ export default{
     order () {
       this.$router.push('/order/confirm')
     },
+    // 渲染数据
+    renderData (res) {
+      this.list = res.cartProductVoList
+      this.cartTotalPrice = res.cartTotalPrice
+      this.selectedAll = res.selectedAll
+      this.cartTotalQuantity = res.cartTotalQuantity
+      this.checkedNum = this.list.filter(item => item.productSelected).length
+    },
+    // 获取购物车信息
     getCartList () {
       this.axios.get('/carts').then((res) => {
-        this.list = res.cartProductVoList
-        this.cartTotalPrice = res.cartTotalPrice
-        this.selectedAll = res.selectedAll
-        this.cartTotalQuantity = res.cartTotalQuantity
-        this.checkedNum = this.list.filter(item => item.productSelected).length
+        // this.list = res.cartProductVoList
+        // this.cartTotalPrice = res.cartTotalPrice
+        // this.selectedAll = res.selectedAll
+        // this.cartTotalQuantity = res.cartTotalQuantity
+        // this.checkedNum = this.list.filter(item => item.productSelected).length
+        this.renderData(res)
+      })
+    },
+    // 选中与全不选中
+    toggleAll () {
+      let url = this.selectedAll ? '/carts/unSelectAll' : '/carts/selectAll'
+      this.axios.put(url).then((res) => {
+        this.renderData(res)
       })
     }
   }
