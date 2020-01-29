@@ -75,8 +75,15 @@ export default {
           password
         })
         .then(res => {
-          this.$cookie.set('userId', res.id, { expires: '1Y' })
-          this.$router.push('/home')
+          this.$cookie.set('userId', res.id, { expires: 'Session' })
+          //   this.$router.push('/home')
+          this.$router.push({
+            path: '/home',
+            name: 'Home',
+            params: {
+              from: 'login'
+            }
+          })
           //   this.$store.dispatch('saveUserName', res.username)
           this.saveUserName(res.username)
         })
@@ -94,7 +101,11 @@ export default {
           password
         })
         .then(res => {
-          alert('注册成功')
+        //   alert('注册成功')
+          this.$message({
+            message: '注册成功!',
+            type: 'success'
+          })
         })
     }
   }

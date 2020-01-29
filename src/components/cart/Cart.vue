@@ -56,6 +56,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
+// import { Message } from 'element-ui'
 import OrderHeader from '@/comment/orderheader/OrderHeader'
 import ServiceBar from '@/comment/servicebar/ServiceBar'
 import NavFooter from '@/comment/navfooter/NavFooter'
@@ -116,13 +117,21 @@ export default{
       let selected = item.productSelected
       if (type === '-') {
         if (quantity === 1) {
-          alert('商品至少保留一件')
+          // Message.warning('商品至少保留一件')
+          this.$message({
+            message: '商品至少保留一件!',
+            type: 'warning'
+          })
           return
         }
         quantity--
       } else if (type === '+') {
         if (quantity > item.productStock) {
-          alert('购买数量不能超过库存数量')
+          // alert('购买数量不能超过库存数量')
+          this.$message({
+            message: '购买数量不能超过库存数量!',
+            type: 'warning'
+          })
           return
         }
         quantity++

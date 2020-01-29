@@ -10,6 +10,7 @@
                 <div class="topbar-user">
                     <a href="javascript:;" v-if="userName">{{userName}}</a>
                     <a href="javascript:;" v-if="!userName" @click="login">登录</a>
+                    <a href="javascript:;" v-if="userName" @click="logout">退出</a>
                     <a href="javascript:;">我的订单</a>
                     <a href="javascript:;" class="my-cart" @click="goToCart">
                         <span class="icon-cart"></span>购物车{{cartCount}}
@@ -62,7 +63,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'NavHeader',
   data () {
@@ -86,6 +87,11 @@ export default {
   },
   mounted () {
     this.getProduction()
+    // 通过看路由中是否有params参数传来，就知道是否为login页面跳转来
+    let params = this.$route.params
+    if (params && params.from === 'login') {
+      this.getCartCount()
+    }
     // console.log(this.userName)
   },
   computed: {
@@ -123,8 +129,30 @@ export default {
     login () {
       this.$router.push('/login')
     },
+    logout () {
+      this.axios.post('/user/logout').then(() => {
+        this.$message({
+          message: '退出成功!',
+          type: 'success'
+        })
+      })
+      this.$cookie.set('userId', '', { expires: '-1' })
+      this.saveUserName('')
+      this.saveCartCount('0')
+    },
+    // 存储值
+    ...mapActions([
+      'saveUserName', // also supports payload `this.nameOfAction(amount)`
+      'saveCartCount'
+    ]),
     goToCart () {
       this.$router.push('/cart')
+    },
+    getCartCount () {
+      this.axios.get('/carts').then(res => {
+        // console.log('carts', res)
+        this.$store.dispatch('saveCartCount', res.cartTotalQuantity)
+      })
     }
   }
 }

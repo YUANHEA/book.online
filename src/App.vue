@@ -27,8 +27,10 @@ export default {
     //   this.res = res
     //   console.log('res', this.res)
     // })
-    this.getUser()
-    this.getCartCount()
+    if (this.$cookie.get('userId')) {
+      this.getUser()
+      this.getCartCount()
+    }
   },
   methods: {
     getUser () {
