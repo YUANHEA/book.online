@@ -15,7 +15,7 @@
                 <a class="btn" href="javascript:;" v-if="btnType==1" @click="surce()">{{sureText}}</a>
                 <a class="btn" href="javascript:;" v-if="btnType==2" @click="cancel()">{{cancelText}}</a>
                 <div class="btn-group" v-if="btnType==3">
-                  <a class="btn" href="javascript:;">{{sureText}}</a>
+                  <a class="btn" href="javascript:;"  @click="surce()">{{sureText}}</a>
                   <a class="btn" href="javascript:;" @click="cancel()">{{cancelText}}</a>
                 </div>
               </div>
