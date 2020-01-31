@@ -1,6 +1,6 @@
 <template>
     <transition name="slide">
-        <div class="modal" v-show="showMode">
+        <div class="modal" v-show="showModal">
           <div class="mask"></div>
           <div class="dialog">
               <div class="dialog-header">
@@ -43,7 +43,7 @@ export default {
       type: String,
       default: '取消'
     },
-    showMode: {
+    showModal: {
       type: Boolean,
       default: false
     }
@@ -61,7 +61,6 @@ export default {
     },
     cancel () {
       // 在父组件定义的量，需要发消息到父组件中改动
-      // this.showMode = false
       this.$emit('cancel')
     }
   }

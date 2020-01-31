@@ -50,6 +50,8 @@
                         <div class="addr-list clearfix">
                             <div
                                 class="addr-info"
+                                :class="{'checked': index ===checkedIndex}"
+                                @click="checkedIndex = index"
                                 v-for="(item, index) in addressList"
                                 :key="index"
                             >
@@ -60,12 +62,12 @@
                                     <br />
                                 </div>
                                 <div class="action">
-                                    <a href="javascript:;" class="fl" @click="delAddress (item)" >
+                                    <a href="javascript:;" class="fl" @click="delAddress (item)">
                                         <svg class="icon icon-del">
-                                            <use xlink:href="#icon-del"/>
+                                            <use xlink:href="#icon-del" />
                                         </svg>
                                     </a>
-                                    <a href="javascript:;" class="fr">
+                                    <a href="javascript:;" class="fr" @click="editAddress (item)">
                                         <svg class="icon icon-edit">
                                             <use xlink:href="#icon-edit" />
                                         </svg>
@@ -124,30 +126,40 @@
                     </div>
                     <div class="btn-group">
                         <a href="/#/cart" class="btn btn-default btn-large">返回购物车</a>
-                        <a href="javascript:;" class="btn btn-large" @click="orderSubmit">去结算</a>
+                        <a href="javascript:;" class="btn btn-large" @click="submitOrder">去结算</a>
                     </div>
                 </div>
             </div>
         </div>
-        <modal title="新增确认" btnType="1" :showModal="showEditModal" @cancel="showEditModal=false">
+        <modal title="新增确认" btnType="3" :showModal="showEditModal" @cancel="cancel" @surce="surce">
             <template v-slot:body>
                 <div class="edit-wrap">
                     <div class="item">
-                        <input type="text" class="input" placeholder="姓名" />
-                        <input type="text" class="input" placeholder="手机号" />
+                        <input
+                            type="text"
+                            class="input"
+                            placeholder="姓名"
+                            v-model="checkedItem.receiverName"
+                        />
+                        <input
+                            type="text"
+                            class="input"
+                            placeholder="手机号"
+                            v-model="checkedItem.receiverPhone"
+                        />
                     </div>
                     <div class="item">
-                        <select name="province">
+                        <select name="province" v-model="checkedItem.receiverProvince">
                             <option value="北京">北京</option>
                             <option value="天津">天津</option>
                             <option value="河北">河北</option>
                         </select>
-                        <select name="city">
+                        <select name="city" v-model="checkedItem.receiverCity">
                             <option value="北京">北京</option>
                             <option value="天津">天津</option>
                             <option value="河北">石家庄</option>
                         </select>
-                        <select name="district">
+                        <select name="district" v-model="checkedItem.receiverDistrict">
                             <option value="北京">昌平区</option>
                             <option value="天津">海淀区</option>
                             <option value="河北">东城区</option>
@@ -157,10 +169,15 @@
                         </select>
                     </div>
                     <div class="item">
-                        <textarea name="street"></textarea>
+                        <textarea name="street" v-model="checkedItem.receiverAddress"></textarea>
                     </div>
                     <div class="item">
-                        <input type="text" class="input" placeholder="邮编" />
+                        <input
+                            type="text"
+                            class="input"
+                            placeholder="邮编"
+                            v-model="checkedItem.receiverZip"
+                        />
                     </div>
                 </div>
             </template>
@@ -169,7 +186,7 @@
             title="删除确认"
             btnType="3"
             sureText="确认"
-            :showMode="showMode"
+            :showModal="showModal"
             @cancel="cancel"
             @surce="surce"
         >
@@ -190,9 +207,10 @@ export default {
       cartList: [], // 购物车信息数组
       cartTotalPrice: 0, // 总价格
       count: 0, // 结算商品数
-      showMode: false, // 弹窗
-      userAction: '', // 用户行为 0：新增 1：编辑 2：删除
-      checkeditem: {} // 选中地址项
+      showModal: false, // 弹窗
+      userAction: 0, // 用户行为 0：新增 1：编辑 2：删除
+      checkedItem: {}, // 选中地址项,
+      checkedIndex: 0 // 选中地址项序号
     }
   },
   components: {
@@ -205,15 +223,6 @@ export default {
     },
     closeModal () {
       this.showEditModal = false
-    },
-    // 订单提交
-    orderSubmit () {
-      this.$router.push({
-        path: '/order/pay',
-        query: {
-          orderNo: 123
-        }
-      })
     },
     // 获取地址信息
     getAddressList () {
@@ -237,23 +246,64 @@ export default {
     submitAddress () {
       // eslint-disable-next-line no-unused-vars
       // 挂载在vue上量，用结构赋值.即用this取量那种
-      let { checkeditem, userAction } = this
+      let { checkedItem, userAction } = this
       // eslint-disable-next-line no-unused-vars
       let method = ''
-      // eslint-disable-next-line no-unused-vars
-      let url = ''
+      // eslint-disable-next-line one-var
+      let url = '',
+        params = {}
       // 新增、修改、删除
       if (userAction === 0) {
         url = '/shippings'
         method = 'post'
       } else if (userAction === 1) {
-        url = `/shippings/${checkeditem.id}`
+        url = `/shippings/${checkedItem.id}`
         method = 'put'
       } else if (userAction === 2) {
-        url = `/shippings/${checkeditem.id}`
+        url = `/shippings/${checkedItem.id}`
         method = 'delete'
       }
-      this.axios[method](url).then(res => {
+      if (userAction === 0 || userAction === 1) {
+        // eslint-disable-next-line standard/object-curly-even-spacing
+        let {
+          receiverName,
+          receiverPhone,
+          receiverProvince,
+          receiverCity,
+          receiverDistrict,
+          receiverAddress,
+          receiverZip
+        } = checkedItem
+        // eslint-disable-next-line space-infix-ops
+        let errMsg = ''
+        if (!receiverName) {
+          errMsg = '请输入收货人名称'
+        } else if (!receiverPhone || !/\d{11}/.test(receiverPhone)) {
+          errMsg = '请输入正确格式的手机号'
+        } else if (!receiverProvince) {
+          errMsg = '请选择省份'
+        } else if (!receiverCity) {
+          errMsg = '请选择对应的城市'
+        } else if (!receiverAddress || !receiverDistrict) {
+          errMsg = '请输入收货地址'
+        } else if (!/\d{6}/.test(receiverZip)) {
+          errMsg = '请输入六位邮编'
+        }
+        if (errMsg) {
+          this.$message.error(errMsg)
+          return
+        }
+        params = {
+          receiverName,
+          receiverPhone,
+          receiverProvince,
+          receiverCity,
+          receiverDistrict,
+          receiverAddress,
+          receiverZip
+        }
+      }
+      this.axios[method](url, params).then(() => {
         // 更新数据！
         this.getAddressList()
         // 关闭弹窗！
@@ -265,16 +315,46 @@ export default {
     // 弹窗确认及取消
     surce () {
       this.submitAddress()
-      this.showMode = false
+      this.showModal = false
     },
     cancel () {
-      this.showMode = false
+      this.showModal = false
+      this.showEditModal = false
     },
     // 删除地址信息
     delAddress (item) {
-      this.checkeditem = item
+      this.checkedItem = item
       this.userAction = 2
-      this.showMode = true
+      this.showModal = true
+    },
+    // 新增购物车地址
+    addAddress () {
+      this.checkedItem = {}
+      this.userAction = 0
+      this.showModal = true
+    },
+    // 编辑地址信息
+    editAddress (item) {
+      this.checkedItem = item
+      this.userAction = 1
+      this.showEditModal = true
+    },
+    // 提交订单
+    submitOrder () {
+      let { addressList, checkedIndex } = this
+      let item = addressList[checkedIndex]
+      if (!item) {
+        this.$messages.error('请选择一个收货地址')
+        return
+      }
+      this.axios.post('/orders', { shippingId: item.id }).then((res) => {
+        this.$router.push({
+          path: '/order/pay',
+          query: {
+            orderNo: res.orderNo
+          }
+        })
+      })
     }
   },
   mounted () {
@@ -454,8 +534,10 @@ export default {
                 line-height: 40px;
                 padding-left: 15px;
                 border: 1px solid #e5e5e5;
+                box-sizing: border-box;
+
                 & + .input {
-                    margin-left: 14px;
+                    margin-left: 10px;
                 }
             }
             select {

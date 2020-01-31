@@ -14,7 +14,7 @@
           title="提示"
           btnType="1"
           sureText="查看购物车"
-          :showMode="showMode"
+          :showModal="showModal"
           @cancel="cancel"
           @surce="surce"
         >
@@ -39,7 +39,7 @@ export default {
   name: 'Home',
   data () {
     return {
-      showMode: false
+      showModal: false
     }
   },
   components: {
@@ -54,13 +54,13 @@ export default {
   },
   methods: {
     addCart () {
-      this.showMode = true
+      this.showModal = true
     },
     surce () {
-      this.showMode = false
+      this.showModal = false
     },
     cancel () {
-      this.showMode = false
+      this.showModal = false
     }
   }
 }

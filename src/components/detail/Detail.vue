@@ -83,7 +83,7 @@
             </div>
         </div>
         <service-bar></service-bar>
-        <modal title="提示" btnType="1" sureText="查看购物车" :showMode="showMode"   @cancel="cancel"
+        <modal title="提示" btnType="1" sureText="查看购物车" :showModal="showModal"   @cancel="cancel"
           @surce="surce">
             <template slot="body">
                 <p>商品添加成功！</p>
@@ -115,7 +115,7 @@ export default {
           clickable: true
         }
       },
-      showMode: false
+      showModal: false
     }
   },
   components: {
@@ -143,7 +143,7 @@ export default {
           selected: true
         })
         .then((res = { cartTotalQuantity: 0 }) => {
-          this.showMode = true
+          this.showModal = true
           this.saveCartCount(res.cartTotalQuantity)
           // this.$router.push('/cart')
         })
@@ -153,10 +153,10 @@ export default {
       'saveCartCount' // also supports payload `this.nameOfAction(amount)`
     ]),
     surce () {
-      this.showMode = false
+      this.showModal = false
     },
     cancel () {
-      this.showMode = false
+      this.showModal = false
     }
   }
 }

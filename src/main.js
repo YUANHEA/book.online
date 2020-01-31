@@ -45,7 +45,7 @@ axios.interceptors.response.use(function (response) {
     // 但凡不是正常返回数据，都应该在错误处理最后设置错误抛出。这样就不会进入then中。
     return Promise.reject(res)
   } else {
-    console.log(res.status)
+    // console.log(res.status)
     // alert(res.msg)
     this.$message.error(res.msg);
     // 不让异常情况进入then()
