@@ -55,7 +55,6 @@ export default {
   },
   mounted () {
   },
-  computed: {},
   methods: {
     surce () {
       this.$emit('surce')

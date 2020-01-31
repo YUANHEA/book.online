@@ -5,6 +5,8 @@ import Login from '@/components/login/Login'
 import Home from '@/components/home/Home'
 import Detail from '@/components/detail/Detail'
 import Cart from '@/components/cart/Cart'
+import Order from '@/components/order/Order'
+import OrderConfirm from '@/components/order/components/OrderConfirm'
 
 Vue.use(Router)
 
@@ -34,6 +36,18 @@ export default new Router({
       path: '/cart',
       name: 'Cart',
       component: Cart
+    },
+    {
+      path: '/order',
+      name: 'Order',
+      component: Order,
+      children: [
+        {
+          path: 'confirm',
+          name: 'order-confirm',
+          component: OrderConfirm
+        }
+      ]
     }
   ]
 })

@@ -44,7 +44,6 @@ export default {
   mounted () {
     this.getProduct()
   },
-  computed: {},
   methods: {
     getProduct () {
       this.axios

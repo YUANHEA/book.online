@@ -146,11 +146,6 @@ export default {
     }
   },
   mounted () {},
-  computed: {
-    // swiper () {
-    //   return this.$refs.mySwiper.swiper
-    // }
-  },
   methods: {}
 }
 </script>

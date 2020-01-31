@@ -25,7 +25,10 @@ export default{
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
+@import "assets/scss/mixin.scss";
+@import "assets/scss/base.scss";
+@import "assets/scss/config.scss";
   .order-header{
     padding:30px 0;
     border-bottom:2px solid #FF6600;
