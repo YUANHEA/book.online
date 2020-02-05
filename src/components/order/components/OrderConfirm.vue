@@ -42,6 +42,11 @@
                 </symbol>
             </defs>
         </svg>
+        <order-header title="订单确认">
+            <template v-slot:tip>
+                <span>请认真填写收货地址</span>
+            </template>
+        </order-header>
         <div class="wrapper">
             <div class="container">
                 <div class="order-box">
@@ -197,6 +202,7 @@
     </div>
 </template>
 <script>
+import OrderHeader from '@/comment/orderheader/OrderHeader.vue'
 import Modal from '@/comment/modal/Modal'
 export default {
   name: 'order-confirm',
@@ -214,6 +220,7 @@ export default {
     }
   },
   components: {
+    OrderHeader,
     Modal
   },
   methods: {

@@ -22,7 +22,7 @@
                 <span class="checkbox" :class="{'checked': item.productSelected}" @click="updateCart (item)"></span>
               </div>
               <div class="item-name">
-                <img src="/static/imgs/item-box-3-1.png" alt="">
+                <img :src="item.productMainImage" alt="">
                 <span>{{item.productName+','+ item.productSubtitle}}</span>
               </div>
               <div class="item-price">{{item.productPrice+'元'}}</div>
