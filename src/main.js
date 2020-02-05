@@ -52,6 +52,10 @@ axios.interceptors.response.use(function (response) {
     // 在axios拦截器中，利用promise.reject()对异常处理
     return Promise.reject(res)
   }
+},(error)=>{
+  let res = error.response
+  this.$message.error(res.data.message)
+  return Promise.reject(error)
 })
 /* eslint-disable no-new */
 new Vue({
