@@ -1,44 +1,44 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Login from '@/components/login/Login'
-import Home from '@/components/home/Home'
-import Detail from '@/components/detail/Detail'
-import Cart from '@/components/cart/Cart'
+// import Login from '@/components/login/Login'
+// import Home from '@/components/home/Home'
+// import Detail from '@/components/detail/Detail'
+// import Cart from '@/components/cart/Cart'
 import Order from '@/components/order/Order'
-import OrderConfirm from '@/components/order/components/OrderConfirm'
-import OrderPay from '@/components/order/components/OrderPay'
-import OrderList from '@/components/order/components/OrderList'
-import Alipay from '@/components/order/components/Alipay'
+// import OrderConfirm from '@/components/order/components/OrderConfirm'
+// import OrderPay from '@/components/order/components/OrderPay'
+// import OrderList from '@/components/order/components/OrderList'
+// import Alipay from '@/components/order/components/Alipay'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
+    // {
+    //   path: '/',
+    //   name: 'HelloWorld',
+    //   component: HelloWorld
+    // },
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: resolve => require(['@/components/login/Login'], resolve)
     },
     {
-      path: '/home',
+      path: '/',
       name: 'Home',
-      component: Home
+      component: resolve => require(['@/components/home/Home'], resolve)
+      // redirect: '/index'
     },
     {
       path: '/detail/:id',
       name: 'Detail',
-      component: Detail
+      component: resolve => require(['@/components/detail/Detail'], resolve)
     },
     {
       path: '/cart',
       name: 'Cart',
-      component: Cart
+      component: resolve => require(['@/components/cart/Cart'], resolve)
     },
     {
       path: '/order',
@@ -48,22 +48,22 @@ export default new Router({
         {
           path: 'confirm',
           name: 'order-confirm',
-          component: OrderConfirm
+          component: () => import('@/components/order/components/OrderConfirm')
         },
         {
           path: 'pay',
           name: 'order-pay',
-          component: OrderPay
+          component: () => import('@/components/order/components/OrderPay')
         },
         {
           path: 'list',
           name: 'order-list',
-          component: OrderList
+          component: () => import('@/components/order/components/OrderList')
         },
         {
           path: 'alipay',
           name: 'alipay',
-          component: Alipay
+          component: () => import('@/components/order/components/Alipay')
         }
       ]
     }

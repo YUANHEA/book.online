@@ -78,7 +78,8 @@ export default {
           this.$cookie.set('userId', res.id, { expires: 'Session' })
           //   this.$router.push('/home')
           this.$router.push({
-            path: '/home',
+            // path: '/home',
+            path: '/',
             name: 'Home',
             params: {
               from: 'login'

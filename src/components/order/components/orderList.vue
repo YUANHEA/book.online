@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="orderLPnt">
-                  <!-- <el-pagination
+                  <el-pagination
                     class="pagination"
                     background
                     layout="prev, pager, next"
@@ -65,9 +65,9 @@
                     :currentPage="pageNum"
                     :pageSize="pageSize"
                     :total="total">
-                  </el-pagination> -->
+                  </el-pagination>
                 </div>
-                <div class="elBtn">
+                <div class="elBtn" v-if="false">
                     <el-button
                         type="primary"
                         :loading="loading"
@@ -76,6 +76,7 @@
                     >加载中</el-button>
                 </div>
                 <div
+                    v-if="false"
                     class="load-more"
                     v-infinite-scroll="scrollMore"
                     infinite-scroll-disabled="busy"
