@@ -74,6 +74,9 @@ module.exports = {
      */
 
     productionSourceMap: false,
+    chainWebpack:(config) =>{
+      config.plugins.delete('prefetch')
+    },
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 
