@@ -91,10 +91,10 @@
                             <li v-for="(item, index) in cartList" :key="index">
                                 <div class="good-name">
                                     <img :src="item.productMainImage" alt />
-                                    <span>{{item.productName+' '+item.productSubtitle}}</span>
+                                    <span>{{item.bookName+' '+item.auther}}</span>
                                 </div>
-                                <div class="good-price">{{item.productPrice+'元'+'x'+item.quantity}}</div>
-                                <div class="good-total">{{item.productTotalPrice}}元</div>
+                                <div class="good-price">{{item.price+'元'+'x'+item.quantity}}</div>
+                                <div class="good-total">{{item.bookTotalPrice}}元</div>
                             </li>
                         </ul>
                     </div>
@@ -146,10 +146,18 @@
                             placeholder="姓名"
                             v-model="checkedItem.receiverName"
                         />
+                    </div>
+                    <div class="item">
+                         <input
+                            type="text"
+                            class="input"
+                            placeholder="座机"
+                            v-model="checkedItem.receiverMobile"
+                        />
                         <input
                             type="text"
                             class="input"
-                            placeholder="手机号"
+                            placeholder="手机"
                             v-model="checkedItem.receiverPhone"
                         />
                     </div>
@@ -241,8 +249,9 @@ export default {
     // 获取购物车信息
     getCartList () {
       this.axios.get('/carts').then(res => {
-        this.cartList = res.cartProductVoList.filter(
-          item => item.productSelected
+        console.log(res)
+        this.cartList = res.cartBookVoList.filter(
+          item => item.bookSelected
         )
         this.cartTotalPrice = res.cartTotalPrice
         this.cartList.map(item => {
@@ -275,6 +284,7 @@ export default {
         let {
           receiverName,
           receiverPhone,
+          receiverMobile,
           receiverProvince,
           receiverCity,
           receiverDistrict,
@@ -285,6 +295,8 @@ export default {
         let errMsg = ''
         if (!receiverName) {
           errMsg = '请输入收货人名称'
+        } else if (!receiverPhone || !/\d{8}/.test(receiverMobile)) {
+          errMsg = '请输入正确格式的座机号'
         } else if (!receiverPhone || !/\d{11}/.test(receiverPhone)) {
           errMsg = '请输入正确格式的手机号'
         } else if (!receiverProvince) {
@@ -302,6 +314,7 @@ export default {
         }
         params = {
           receiverName,
+          receiverMobile,
           receiverPhone,
           receiverProvince,
           receiverCity,
@@ -336,6 +349,7 @@ export default {
     },
     // 新增购物车地址
     addAddress () {
+      console.log('1')
       this.checkedItem = {}
       this.userAction = 0
       this.showModal = true

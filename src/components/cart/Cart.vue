@@ -19,13 +19,14 @@
           <ul class="cart-item-list">
             <li class="cart-item" v-for="(item, index) in list" :key="index">
               <div class="item-check">
-                <span class="checkbox" :class="{'checked': item.productSelected}" @click="updateCart (item)"></span>
+                <span class="checkbox" :class="{'checked': item.bookSelected}" @click="updateCart (item)"></span>
               </div>
               <div class="item-name">
                 <img :src="item.productMainImage" alt="">
-                <span>{{item.productName+','+ item.productSubtitle}}</span>
+                <span>{{item.bookName+','+ item.auther}}</span>
+                <!-- <span>{{item.bookName}}</span> -->
               </div>
-              <div class="item-price">{{item.productPrice+'元'}}</div>
+              <div class="item-price">{{item.price+'元'}}</div>
               <div class="item-num">
                 <div class="num-box">
                   <a href="javascript:;" @click="updateCart (item, '-')">-</a>
@@ -33,7 +34,7 @@
                   <a href="javascript:;" @click="updateCart (item, '+')">+</a>
                 </div>
               </div>
-              <div class="item-total">{{item.productTotalPrice}}元</div>
+              <div class="item-total">{{item.bookTotalPrice}}元</div>
               <div class="item-del" @click="deleteProduct (item)"></div>
             </li>
           </ul>
@@ -82,11 +83,11 @@ export default{
   methods: {
     // 渲染数据
     renderData (res) {
-      this.list = res.cartProductVoList
+      this.list = res.cartBookVoList
       this.cartTotalPrice = res.cartTotalPrice
       this.selectedAll = res.selectedAll
       this.cartTotalQuantity = res.cartTotalQuantity
-      this.checkedNum = this.list.filter(item => item.productSelected).length
+      this.checkedNum = this.list.filter(item => item.bookSelected).length
     },
     // 存储值
     ...mapActions([
@@ -99,7 +100,7 @@ export default{
         // this.cartTotalPrice = res.cartTotalPrice
         // this.selectedAll = res.selectedAll
         // this.cartTotalQuantity = res.cartTotalQuantity
-        // this.checkedNum = this.list.filter(item => item.productSelected).length
+        // this.checkedNum = this.list.filter(item => item.bookSelected).length
         this.renderData(res)
       })
     },
@@ -114,7 +115,7 @@ export default{
     updateCart (item, type) {
       let quantity = item.quantity
       // eslint-disable-next-line no-unused-vars
-      let selected = item.productSelected
+      let selected = item.bookSelected
       if (type === '-') {
         if (quantity === 1) {
           // Message.warning('商品至少保留一件')
@@ -136,23 +137,23 @@ export default{
         }
         quantity++
       } else {
-        selected = !item.productSelected
+        selected = !item.bookSelected
       }
-      this.axios.put(`/carts/${item.productId}`, {quantity, selected}).then((res) => {
+      this.axios.put(`/carts/${item.bookId}`, {quantity, selected}).then((res) => {
         this.renderData(res)
         this.saveCartCount(res.cartTotalQuantity)
       })
     },
     // 删除商品！
     deleteProduct (item) {
-      this.axios.delete(`/carts/${item.productId}`).then((res) => {
+      this.axios.delete(`/carts/${item.bookId}`).then((res) => {
         this.renderData(res)
         this.saveCartCount(res.cartTotalQuantity)
       })
     },
     // 购物车下单
     order () {
-      let isCheck = this.list.every(item => !item.productSelected)
+      let isCheck = this.list.every(item => !item.bookSelected)
       isCheck ? alert('请选择一件商品') : this.$router.push('/order/confirm')
     }
   }
