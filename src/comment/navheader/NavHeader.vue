@@ -113,7 +113,7 @@ export default {
       this.axios
         .get('/products', {
           params: {
-            categoryId: '100012',
+            categoryId: '1',
             pageSize: 6
           }
         })
