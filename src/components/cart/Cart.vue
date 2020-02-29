@@ -22,8 +22,9 @@
                 <span class="checkbox" :class="{'checked': item.productSelected}" @click="updateCart (item)"></span>
               </div>
               <div class="item-name">
-                <img :src="item.productMainImage" alt="">
-                <span>{{item.productName+','+ item.productSubtitle}}</span>
+                <img v-lazy="item.cover" alt="">
+                <span>{{item.bookName+','+ item.auther}}</span>
+                <!-- <span>{{item.bookName}}</span> -->
               </div>
               <div class="item-price">{{item.productPrice+'元'}}</div>
               <div class="item-num">

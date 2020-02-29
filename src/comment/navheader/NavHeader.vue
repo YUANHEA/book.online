@@ -27,7 +27,7 @@
                 <div class="header-menu">
                     <div class="item-menu">
                         <!-- 如果文字就用span做块级 -->
-                        <span>小米手机</span>
+                        <span>小米手机1</span>
                         <div class="children">
                             <ul>
                                 <li class="product" v-for="item in productList" :key="item.id">
@@ -111,7 +111,7 @@ export default {
   methods: {
     getProduction () {
       this.axios
-        .get('/products', {
+        .get('/products/', {
           params: {
             categoryId: '100012',
             pageSize: 6

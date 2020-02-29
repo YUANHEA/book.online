@@ -47,9 +47,9 @@ export default {
   methods: {
     getProduct () {
       this.axios
-        .get('/products', {
+        .get('/products/', {
           params: {
-            categoryId: '100012',
+            categoryId: '1',
             pageSize: 14
           }
         })
