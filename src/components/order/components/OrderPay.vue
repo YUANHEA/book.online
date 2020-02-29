@@ -48,7 +48,7 @@
                                 <ul>
                                     <li v-for="(item,index) in orderItemVoList" :key="index">
                                         <img v-lazy="item.productImage" />
-                                        {{item.bookName}}
+                                        {{item.productName}}
                                     </li>
                                 </ul>
                             </div>
