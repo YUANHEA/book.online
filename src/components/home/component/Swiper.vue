@@ -95,23 +95,23 @@ export default {
       sliderList: [
         {
           id: '42',
-          img: 'static/imgs/slider/slide-1.jpg'
+          img: 'https://s2.ax1x.com/2020/02/27/3dYdwF.jpg'
         },
         {
           id: '45',
-          img: 'static/imgs/slider/slide-2.jpg'
+          img: 'https://s2.ax1x.com/2020/02/27/3dYaeU.jpg'
         },
         {
           id: '46',
-          img: 'static/imgs/slider/slide-3.jpg'
+          img: 'https://s2.ax1x.com/2020/02/27/3dYNLT.jpg'
         },
         {
           id: '47',
-          img: 'static/imgs/slider/slide-4.jpg'
+          img: 'https://s2.ax1x.com/2020/02/27/3dY3Js.jpg'
         },
         {
           id: '49',
-          img: 'static/imgs/slider/slide-5.jpg'
+          img: 'https://s2.ax1x.com/2020/02/27/3dY3Js.jpg'
         }
       ],
       menuList: [

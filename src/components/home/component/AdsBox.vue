@@ -8,7 +8,7 @@
         <div class="container">
             <div class="banner">
                 <a href="/#/product/30">
-                    <img v-lazy="'/static/imgs/banner-1.png'" alt />
+                    <img v-lazy="'https://s2.ax1x.com/2020/02/27/3dY3Js.jpg'" alt />
                 </a>
             </div>
         </div>
@@ -24,19 +24,19 @@ export default {
       adsList: [
         {
           id: 33,
-          img: '/static/imgs/ads/ads-1.png'
+          img: 'https://s2.ax1x.com/2020/02/27/3dJTqU.jpg'
         },
         {
           id: 48,
-          img: '/static/imgs/ads/ads-2.jpg'
+          img: 'https://s2.ax1x.com/2020/02/27/3dJba4.jpg'
         },
         {
           id: 45,
-          img: '/static/imgs/ads/ads-3.png'
+          img: 'https://s2.ax1x.com/2020/02/27/3dJHZF.jpg'
         },
         {
           id: 47,
-          img: '/static/imgs/ads/ads-4.jpg'
+          img: 'https://s2.ax1x.com/2020/02/27/3dJqIJ.jpg'
         }
       ]
     }

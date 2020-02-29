@@ -16,12 +16,12 @@
                             <!-- 动态绑定样式，:class="{'new-pro': index % 2==0}"。有{'单引号':键值对}，大括号，键值对 -->
                             <span :class="{'new-pro': index % 2==0}">新品</span>
                             <div class="item-img">
-                                <img v-lazy="item.mainImage" alt="#" />
+                                <img v-lazy="item.cover" alt="#" />
                             </div>
                             <div class="item-info">
                                 <h3>{{item.name}}</h3>
-                                <p>{{item.subtitle}}</p>
-                                <p class="price" @click="addCart(item.id)">{{item.price}}元</p>
+                                <p>{{item.auther}}</p>
+                                <p class="price" @click="addCart(item.bookId)">{{item.price}}元</p>
                             </div>
                         </div>
                     </div>
@@ -47,9 +47,9 @@ export default {
   methods: {
     getProduct () {
       this.axios
-        .get('/products', {
+        .get('/products/', {
           params: {
-            categoryId: '100012',
+            categoryId: '1',
             pageSize: 14
           }
         })
@@ -63,12 +63,12 @@ export default {
           //   console.log(this.productList)
         })
     },
-    addCart (productId) {
+    addCart (bookId) {
       this.$emit('addCart')
       //   由于未做登陆功能，后台会返回10,这里先不做
       this.axios
         .post('/carts', {
-          productId: productId,
+          bookId: bookId,
           selected: true
         })
         .then((res) => {

@@ -33,7 +33,7 @@
                                 <li class="product" v-for="item in productList" :key="item.id">
                                     <a :href="'/#/product/'+item.id">
                                         <!-- <img class="pro-img" :src="item.mainImage" alt="#" /> -->
-                                        <img class="pro-img" v-lazy="item.mainImage" alt="#" />
+                                        <img class="pro-img" v-lazy="item.cover" alt="#" />
                                         <div class="pro-name">{{item.name}}</div>
                                         <div class="pro-price">{{item.price | currency}}</div>
                                     </a>
@@ -111,7 +111,7 @@ export default {
   methods: {
     getProduction () {
       this.axios
-        .get('/products', {
+        .get('/products/', {
           params: {
             categoryId: '1',
             pageSize: 6

@@ -79,7 +79,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="addr-add" @click="openAddressModal">
+                            <div class="addr-add" @click="addAddress()">
                                 <div class="icon-add"></div>
                                 <div>添加新地址</div>
                             </div>
@@ -352,7 +352,7 @@ export default {
       console.log('1')
       this.checkedItem = {}
       this.userAction = 0
-      this.showModal = true
+      this.showEditModal = true
     },
     // 编辑地址信息
     editAddress (item) {
