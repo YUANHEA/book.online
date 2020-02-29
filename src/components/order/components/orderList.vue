@@ -34,13 +34,13 @@
                                     :key="i"
                                 >
                                     <div class="good-img">
-                                        <img v-lazy="item.bookImage" alt />
+                                        <img v-lazy="item.productImage" alt />
                                     </div>
                                     <div class="good-name">
-                                        <div class="p-name">{{item.bookName}}</div>
+                                        <div class="p-name">{{item.productName}}</div>
                                         <div
                                             class="p-money"
-                                        >{{item.currentUnitPrice + 'X' + item.quantity}}元</div>
+                                        >{{item.totalPrice + 'X' + item.quantity}}元</div>
                                     </div>
                                 </div>
                             </div>
