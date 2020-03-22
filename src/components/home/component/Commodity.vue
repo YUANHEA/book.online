@@ -1,12 +1,12 @@
 <template>
     <div class="commodity">
         <div class="container">
-            <h2>手机</h2>
+            <h2>图书</h2>
             <div class="wrapper">
                 <!-- 但凡有flex子级，必定有flex父级 -->
                 <div class="banner-left">
                     <a href>
-                        <img v-lazy="'static/imgs/mix-alpha.jpg'" alt />
+                        <img v-lazy="'static/imgs/广告图.jpg'" alt />
                     </a>
                 </div>
                 <div class="list-box">
@@ -14,7 +14,7 @@
                     <div class="list" v-for="(items,index) in productList" :key="index">
                         <div class="item" v-for="(item,index) in items" :key="index">
                             <!-- 动态绑定样式，:class="{'new-pro': index % 2==0}"。有{'单引号':键值对}，大括号，键值对 -->
-                            <span :class="{'new-pro': index % 2==0}">新品</span>
+                            <!-- <span :class="{'new-pro': index % 2==0}">新品</span> -->
                             <div class="item-img">
                                 <img v-lazy="item.cover" alt="#" />
                             </div>

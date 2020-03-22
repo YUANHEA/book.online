@@ -1,7 +1,7 @@
 <template>
     <div class="detail">
         <nav-header></nav-header>
-        <product-param v-bind:title="product.name" class="clearfix"></product-param>
+        <!-- <product-param v-bind:title="product.name" class="clearfix"></product-param> -->
         <div class="wrapper clearfix">
             <div class="container clearfix">
                 <div class="swiper">
@@ -96,7 +96,7 @@
 import { mapActions } from 'vuex'
 import NavHeader from '@/comment/navheader/NavHeader.vue'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import ProductParam from '@/comment/productparam/ProductParam.vue'
+// import ProductParam from '@/comment/productparam/ProductParam.vue'
 import ServiceBar from '@/comment/servicebar/ServiceBar.vue'
 import NavFooter from '@/comment/navfooter/NavFooter.vue'
 import Modal from '@/comment/modal/Modal'
@@ -122,7 +122,7 @@ export default {
     NavHeader,
     swiper,
     swiperSlide,
-    ProductParam,
+    // ProductParam,
     ServiceBar,
     NavFooter,
     Modal

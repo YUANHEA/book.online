@@ -24,19 +24,20 @@ export default {
       adsList: [
         {
           id: 33,
-          img: 'https://s2.ax1x.com/2020/02/27/3dJTqU.jpg'
+          // img: 'https://s2.ax1x.com/2020/02/27/3dJTqU.jpg'
+          img: 'https://s2.ax1x.com/2020/02/27/3dY3Js.jpg'
         },
         {
           id: 48,
-          img: 'https://s2.ax1x.com/2020/02/27/3dJba4.jpg'
+          img: 'https://s2.ax1x.com/2020/02/27/3dJqIJ.jpg'
         },
         {
           id: 45,
-          img: 'https://s2.ax1x.com/2020/02/27/3dJHZF.jpg'
+          img: 'https://s2.ax1x.com/2020/02/27/3dJba4.jpg'
         },
         {
           id: 47,
-          img: 'https://s2.ax1x.com/2020/02/27/3dJqIJ.jpg'
+          img: 'https://s2.ax1x.com/2020/02/27/3dJHZF.jpg'
         }
       ]
     }

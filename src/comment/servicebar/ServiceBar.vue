@@ -2,10 +2,10 @@
     <div class="service">
         <div class="container">
             <ul>
-                <li><span></span>预约维修服务</li>
+                <li><span></span>正规渠道，正品保证</li>
+                <li><span></span>放心购物，货到付款</li>
+                <!-- <li><span></span>15天免费换货</li> -->
                 <li><span></span>7天无理由退货</li>
-                <li><span></span>15天免费换货</li>
-                <li><span></span>满150元包邮</li>
             </ul>
         </div>
     </div>

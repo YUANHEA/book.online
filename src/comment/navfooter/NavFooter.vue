@@ -2,10 +2,10 @@
     <div class="footer">
         <div class="footer-logo">
             <img src="../../../public/imgs/logo-footer.png" alt />
-            <p>小米商城</p>
+            <p>校园闲置书交易系统</p>
         </div>
         <div class="footer-link">
-            <a href="https://www.imooc.com/u/1343480" target="_blank">河畔一角主页</a>
+            <!-- <a href="https://www.imooc.com/u/1343480" target="_blank">河畔一角主页</a>
             <span>|</span>
             <a href="https://coding.imooc.com/class/113.html" target="_blank">Vue全栈课程</a>
             <span>|</span>
@@ -14,10 +14,10 @@
             <a
                 href="https://coding.imooc.com/class/343.html"
                 target="_blank"
-            >微信支付专项课程（H5+小程序+Node+Mongo）</a>
+            >微信支付专项课程（H5+小程序+Node+Mongo）</a> -->
         </div>
         <div class="footer-copyright">
-            Copyright ©2019 <span>mi.futurefe.com</span> All Rights Reserved.
+            Copyright ©2019 <span>中山book.online</span> All Rights Reserved.
         </div>
     </div>
 </template>

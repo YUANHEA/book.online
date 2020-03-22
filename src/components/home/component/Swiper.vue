@@ -17,38 +17,38 @@
             <div class="nav-menu">
                 <ul class="menu-wrap">
                     <li class="menu-item">
-                        <a href="javascript:;">手机 电话卡</a>
+                        <a href="javascript:;">教育</a>
                         <div class="children">
-                            <ul v-for="(items, index) in menuList" :key="index">
+                            <!-- <ul v-for="(items, index) in menuList" :key="index">
                                 <li v-for="item in items" :key="item.id">
                                     <a href>
                                         <img :src="item?item.img:'static/imgs/item-box-1.png'" alt />
                                         <span>{{item?item.name:'小米9'}}</span>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:;">电视 盒子</a>
+                        <a href="javascript:;">文艺</a>
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:;">笔记本 平板</a>
+                        <a href="javascript:;">人文社科</a>
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:;">家电 插线板</a>
+                        <a href="javascript:;">小说</a>
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:;">出行 穿戴</a>
+                        <a href="javascript:;">经管</a>
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:;">智能 路由器</a>
+                        <a href="javascript:;">生活</a>
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:;">电源 配件</a>
+                        <a href="javascript:;">科技</a>
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:;">生活 箱包</a>
+                        <a href="javascript:;">英文原版图书</a>
                     </li>
                 </ul>
             </div>

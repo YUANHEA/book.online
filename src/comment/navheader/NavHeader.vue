@@ -3,9 +3,9 @@
         <div class="nav-topbar">
             <div class="container">
                 <div class="topbar-menu">
-                    <a href="#">小米商城</a>
-                    <a href="#">MUI</a>
-                    <a href="#">协议规则</a>
+                    <a href="#">闲置书商城</a>
+                    <!-- <a href="#">MUI</a> -->
+                    <a href="#">发布闲置书协议规则</a>
                 </div>
                 <div class="topbar-user">
                     <a href="javascript:;" v-if="userName">{{userName}}</a>
@@ -27,7 +27,7 @@
                 <div class="header-menu">
                     <div class="item-menu">
                         <!-- 如果文字就用span做块级 -->
-                        <span>小米手机1</span>
+                        <span>图书</span>
                         <div class="children">
                             <ul>
                                 <li class="product" v-for="item in productList" :key="item.id">
@@ -42,10 +42,10 @@
                         </div>
                     </div>
                     <div class="item-menu">
-                        <span>RedMi红米</span>
+                        <span>电子书</span>
                     </div>
                     <div class="item-menu">
-                        <span>电视</span>
+                        <span>网络文学</span>
                         <div class="children">
                             <img src alt />
                         </div>
